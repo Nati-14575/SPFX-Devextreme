@@ -1,106 +1,50 @@
 import * as React from "react";
-import styles from "./DataGrid.module.scss";
 import { IDataGridProps } from "./IDataGridProps";
-import { escape } from "@microsoft/sp-lodash-subset";
+import { SPComponentLoader } from "@microsoft/sp-loader";
+import data from "./testData.json";
+import DataGrid, {
+  Column,
+  Pager,
+  Paging,
+  SearchPanel,
+} from "devextreme-react/data-grid";
 
-export default class SampleGrid extends React.Component<IDataGridProps, {}> {
+const pageSizes = [10, 25, 50, 100];
+export default class SampleGrid extends React.Component<IDataGridProps, any> {
+  constructor(props) {
+    super(props);
+    SPComponentLoader.loadCss(
+      "https://cdn3.devexpress.com/jslib/22.1.3/css/dx.common.css"
+    );
+    SPComponentLoader.loadCss(
+      "https://cdn3.devexpress.com/jslib/22.1.3/css/dx.material.blue.light.css"
+    );
+  }
+
   public render(): React.ReactElement<IDataGridProps> {
-    const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName,
-    } = this.props;
-
     return (
-      <section
-        className={`${styles.dataGrid} 
-        ${hasTeamsContext ? styles.teams : ""}`}
-      >
-        <div className={styles.welcome}>
-          <img
-            alt=""
-            src={
-              isDarkTheme
-                ? require("../assets/welcome-dark.png")
-                : require("../assets/welcome-light.png")
-            }
-            className={styles.welcomeImage}
+      <section>
+        <DataGrid
+          dataSource={data}
+          allowColumnReordering={true}
+          rowAlternationEnabled={true}
+          showBorders={true}
+        >
+          <SearchPanel visible={true} highlightCaseSensitive={true} />
+          <Column dataField="id" caption="Id" />
+          <Column dataField="first_name" caption="First Name" />
+          <Column dataField="last_name" caption="Last Name" />
+          <Column dataField="email" caption="Email" />
+          <Column dataField="gender" caption="Gender" />
+          <Column dataField="ip_address" caption="IP Address" />
+
+          <Pager
+            allowedPageSizes={pageSizes}
+            showPageSizeSelector={true}
+            showNavigationButtons
           />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>
-            Web part property value: <strong>{escape(description)}</strong>
-          </div>
-        </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for
-            Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest
-            way to extend Microsoft 365 with automatic Single Sign On, automatic
-            hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li>
-              <a href="https://aka.ms/spfx" target="_blank" rel="noreferrer">
-                SharePoint Framework Overview
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://aka.ms/spfx-yeoman-graph"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Use Microsoft Graph in your solution
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://aka.ms/spfx-yeoman-teams"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Build for Microsoft Teams using SharePoint Framework
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://aka.ms/spfx-yeoman-viva"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Build for Microsoft Viva Connections using SharePoint Framework
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://aka.ms/spfx-yeoman-store"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Publish SharePoint Framework applications to the marketplace
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://aka.ms/spfx-yeoman-api"
-                target="_blank"
-                rel="noreferrer"
-              >
-                SharePoint Framework API reference
-              </a>
-            </li>
-            <li>
-              <a href="https://aka.ms/m365pnp" target="_blank" rel="noreferrer">
-                Microsoft 365 Developer Community
-              </a>
-            </li>
-          </ul>
-        </div>
+          <Paging defaultPageSize={10} />
+        </DataGrid>
       </section>
     );
   }
