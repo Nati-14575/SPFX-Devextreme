@@ -1,0 +1,16 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.15.0",
+    "libraryName": "data-grid",
+    "libraryId": "88204c4a-b52c-471d-a753-f529d2cec0db",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "data grid",
+    "solutionShortDescription": "data grid description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "data-grid-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/dataGrid/DataGridWebPart.js",
+          "manifest": "./src/webparts/dataGrid/DataGridWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "DataGridWebPartStrings": "lib/webparts/dataGrid/loc/{locale}.js"
+  }
+}
