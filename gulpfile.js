@@ -15,6 +15,6 @@ build.rig.getTasks = function () {
   return result;
 };
 
-// build.tslint.enabled = false;
+build.tslintCmd.enabled = false;
 
 build.initialize(require("gulp"));

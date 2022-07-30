@@ -17,8 +17,19 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "typeRoots": ["./node_modules/@types", "./node_modules/@microsoft"],
-    "types": ["webpack-env"],
-    "lib": ["es5", "dom", "es2015.collection", "es2015.promise"]
+    "types": ["webpack-env", "jquery"],
+    "lib": [
+      "es5",
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "es2015.collection",
+      "es2015.promise"
+    ]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "node_modules/@types/dom-mediacapture-record/index.d.ts"
+  ]
 }

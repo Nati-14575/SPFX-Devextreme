@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDom from "react-dom";
 import { Version } from "@microsoft/sp-core-library";
+
 import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
@@ -29,6 +30,7 @@ export default class DataGridWebPart extends BaseClientSideWebPart<IDataGridWebP
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
+        context: this.context,
       }
     );
 
@@ -59,20 +61,20 @@ export default class DataGridWebPart extends BaseClientSideWebPart<IDataGridWebP
       return;
     }
 
-    this._isDarkTheme = !!currentTheme.isInverted;
-    const { semanticColors } = currentTheme;
-
-    if (semanticColors) {
-      this.domElement.style.setProperty(
-        "--bodyText",
-        semanticColors.bodyText || null
-      );
-      this.domElement.style.setProperty("--link", semanticColors.link || null);
-      this.domElement.style.setProperty(
-        "--linkHovered",
-        semanticColors.linkHovered || null
-      );
-    }
+    // this._isDarkTheme = !!currentTheme.isInverted;
+    // const { semanticColors } = currentTheme;
+    //
+    // if (semanticColors) {
+    //   this.domElement.style.setProperty(
+    //     "--bodyText",
+    //     semanticColors.bodyText || null
+    //   );
+    //   this.domElement.style.setProperty("--link", semanticColors.link || null);
+    //   this.domElement.style.setProperty(
+    //     "--linkHovered",
+    //     semanticColors.linkHovered || null
+    //   );
+    // }
   }
 
   protected onDispose(): void {
